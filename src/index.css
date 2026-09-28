@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Palette lifted from the Vivida pitch deck so the page and the deck read as one system. */
+@theme {
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Paper */
+  --color-bone-50: #fbf8f1;
+  --color-bone-100: #efe9dc;
+  --color-bone-200: #ede6d6;
+
+  /* Ink */
+  --color-ink-900: #0b0b0a;
+  --color-ink-800: #151513;
+  --color-ink-700: #1b1a17;
+  --color-ink-600: #2e2b25;
+
+  /* Warm greys. ash-400 is the deck's #9a9486: it clears AA on ink but only
+     reaches 3:1 on paper, so on light backgrounds it is display-size only. */
+  --color-ash-600: #5e5a51;
+  --color-ash-500: #7d786c;
+  --color-ash-400: #9a9486;
+
+  /* Brushed gold. 600 on dark, 800 on light — 600 does not clear AA on bone. */
+  --color-gold-600: #c6a15b;
+  --color-gold-800: #7a6436;
+
+  /* Colorway drops, one per snake species */
+  --color-mamba: #0b0b0a;
+  --color-komodo: #5e6b3a;
+  --color-boa: #1f6b4a;
+  --color-leucistic: #efe9dc;
+  --color-coral: #d2533a;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Clears the fixed nav for every jump, including the footnote anchors. */
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.font-serif {
+  font-variant-ligatures: common-ligatures;
+}
