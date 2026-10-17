@@ -1,3 +1,57 @@
+# Ecdysis / Vivida
+
+Four routes, built to an attention budget.
+
+| Route | Audience | Job |
+| --- | --- | --- |
+| `/` | everyone | The 10-second triage page. One claim, one number, the object, a fork. |
+| `/consumer` | buyers and wearers | The object, the five species, and the waitlist. |
+| `/research` | judges, clinicians | The full case study on adherence. |
+| `/investors` | **unlisted** | Burn, runway, the 24-month plan, the evidence ladder. |
+
+## The attention budget
+
+Nielsen (NN/g), built on Liu, White and Dumais's Weibull analysis of over two
+billion dwell times across 205,873 pages: the first 10 seconds are ruthless
+triage, users stay highly likely to leave through the next 20, and the curve only
+flattens around 30 seconds. Survive that and you often get two minutes or more.
+
+So `/` carries one claim and a fork and does not scroll on a laptop. Explaining is
+the next page's job, and the next page has a far more generous budget. Do not add
+sections to the landing page without taking something else off it.
+
+## The unlisted investor route
+
+`/investors` is not linked from any nav, is disallowed in `public/robots.txt`, and
+gets a `noindex,nofollow` meta tag from `RobotsPolicy`, which owns that tag for the
+whole app from inside the router. An earlier version created the tag inside the
+investor page and removed it on unmount; under StrictMode's mount/cleanup/mount
+cycle the stale element reference leaked `noindex` onto `/research` and dropped it
+from `/investors`. Reconciling from the live DOM on every location change has one
+owner and no race.
+
+**This is obscurity, not security.** Anyone with the link can read the page, and
+the `noindex` tag is injected by JavaScript, so it only reaches crawlers that
+execute JS. `robots.txt` is the stronger of the two. Do not put anything on this
+route that would genuinely harm you if a stranger read it.
+
+## Financial model
+
+`src/data/financials.js` holds every input, and all of them start `null`. Nothing
+is estimated, inferred from the deck, or borrowed from a comparable company. The
+model returns `ready: false` when it cannot compute honestly, and the page renders
+a marker rather than a zero — a chart showing $0 burn and infinite runway is worse
+than a chart showing nothing. Fill in the nulls and the curve draws itself.
+
+## Measuring contrast in this codebase
+
+Tailwind v4 emits `oklab()` / `oklch()` colours, and `getComputedStyle` returns
+them in that space. A contrast checker that parses the computed string with a
+naive `/[\d.]+/g` regex will read `oklab(0.979 0.0005 0.0098 / 0.85)` as a
+near-black RGB triple and report wild false failures. Convert through a canvas
+instead — set `ctx.fillStyle` to the colour and read the pixel back — which
+handles every colour space and alpha exactly.
+
 # The Adherence Paradox
 
 An educational case-study page on the behavioral research behind Vivida, the

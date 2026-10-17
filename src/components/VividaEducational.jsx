@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { MotionConfig, motion, useScroll, useTransform } from "framer-motion";
 import {
   Activity,
@@ -217,16 +218,22 @@ export default function VividaEducational() {
         <SectionRail active={activeSection} onJump={jumpTo} />
         <nav className="fixed top-0 z-50 w-full border-b border-bone-200 bg-bone-50/85 backdrop-blur-md">
           <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6 font-sans">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
               <span className="text-sm font-semibold tracking-widest uppercase">
                 Ecdysis
               </span>
-              <span className="text-gold-600">/</span>
+              <span className="text-gold-800">/</span>
               <span className="text-sm tracking-wide text-ash-600">
                 Research &amp; Design
               </span>
-            </div>
+            </Link>
             <div className="flex items-center gap-4">
+              <Link
+                to="/consumer"
+                className="text-xs tracking-widest text-ash-600 uppercase transition-colors hover:text-ink-800"
+              >
+                The band
+              </Link>
               <span className="hidden text-xs font-medium tracking-widest text-ash-600 uppercase lg:inline">
                 The Adherence Paradox
               </span>
@@ -857,7 +864,7 @@ export default function VividaEducational() {
                     <p className="text-xs leading-relaxed text-ash-600">
                       {note.source}
                       {note.status === "pending" && (
-                        <span className="ml-2 inline-block bg-coral/10 px-1.5 py-0.5 align-middle text-[10px] tracking-widest text-coral uppercase">
+                        <span className="ml-2 inline-block bg-coral/10 px-1.5 py-0.5 align-middle text-[10px] tracking-widest text-coral-700 uppercase">
                           citation pending
                         </span>
                       )}

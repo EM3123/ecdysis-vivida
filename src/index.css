@@ -32,6 +32,8 @@
   --color-boa: #1f6b4a;
   --color-leucistic: #efe9dc;
   --color-coral: #d2533a;
+  /* Text-safe coral: the base reaches only 3.9:1 on bone. */
+  --color-coral-700: #a83b25;
 }
 
 html {
